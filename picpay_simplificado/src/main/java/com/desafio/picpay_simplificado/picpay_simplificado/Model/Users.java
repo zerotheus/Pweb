@@ -16,4 +16,6 @@ public class Users {
     @Embedded
     private CPF cpf;
 
+    private String email;
+
 }
