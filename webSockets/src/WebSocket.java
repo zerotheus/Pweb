@@ -14,13 +14,8 @@ public class WebSocket {
         System.out.println("Servidor na porta: " + server.getLocalPort());
         while (true) {
             Socket client = server.accept();
-            System.out.println("Cliente " + client.getInetAddress().getHostAddress() + " conectado");
-            BufferedReader leitor = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            PrintWriter escritor = new PrintWriter(client.getOutputStream(), true);
-            String mensagem = leitor.readLine();
-            System.out.println("Mensagem do cliente " + mensagem);
-            escritor.println("A mensagem: " + mensagem + ", foi recebida");
-            client.close();
+            Requests requests = new Requests(client);
+            requests.run();
         }
     }
 }
