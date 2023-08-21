@@ -1,5 +1,13 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.Calistenics.CPF;
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.Calistenics.Email;
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.Calistenics.Nome;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
@@ -30,6 +38,12 @@ public class Users {
     private final Email email;
     @Embedded
     private final Nome nome;
+    @CreationTimestamp
+    @Column(name = "createdAt", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDateTime updatedAt;
 
     @JsonCreator
     public Users(@JsonProperty("cpf") String cpf, @JsonProperty("email") String email,

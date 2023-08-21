@@ -1,7 +1,13 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +32,12 @@ public class ContaPF {
     private Users user;
     private float saldo;
     private final String tipo = "PF";
+    @CreationTimestamp
+    @Column(name = "createdAt", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    @Column(name = "updatedAt", nullable = false)
+    private LocalDateTime updatedAt;
 
     public void deposita(float valorADepositar) throws Exception {
         if (valorADepositar <= 0) {
