@@ -1,5 +1,8 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -16,7 +19,7 @@ import lombok.ToString;
 @Table(name = "contas")
 @Getter
 @ToString
-public class ContaPj {
+public class ContaPJ {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +32,10 @@ public class ContaPj {
     @Column(unique = true, nullable = false)
     private CNPJ cnpj;
     private final String tipo = "PF";
+
+    @JsonCreator
+    public ContaPJ(@JsonProperty("user") Users user, @JsonProperty("cnpj") String cnpj) throws Exception {
+        this.user = user;
+        this.cnpj = new CNPJ(cnpj);
+    }
 }

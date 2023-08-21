@@ -1,6 +1,7 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
-import jakarta.persistence.Embedded;
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +42,11 @@ public class ContaPF {
             throw new Exception("Nao se pode trasnferir valores negativos");
         }
         saldo -= valorDaTransferencia;
+    }
+
+    @JsonCreator
+    public ContaPF(Users user) {
+        this.user = user;
     }
 
 }

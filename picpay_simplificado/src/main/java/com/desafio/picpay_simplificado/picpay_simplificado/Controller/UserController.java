@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.CNPJ;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.CPF;
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPF;
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPJ;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Email;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Users;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,18 +21,19 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserController {
 
-    @PostMapping("/Register")
+    @PostMapping("/Register") // usado para debug
     public void createUser(@RequestBody Users user) {
-        /*
-         * System.out.println(cpf);
-         * System.out.println(email);
-         */
         System.out.println(user);
     }
 
     @PostMapping("/CriaPF")
-    public void createContaPF(@RequestBody Users user) {
-        System.out.println(user);
+    public void createContaPF(@RequestBody ContaPF contaPF) {
+        System.out.println(contaPF);
+    }
+
+    @PostMapping("/CriaPJ")
+    public void createContaPJ(@RequestBody ContaPJ contaPj) {
+        System.out.println(contaPj);
     }
 
 }
