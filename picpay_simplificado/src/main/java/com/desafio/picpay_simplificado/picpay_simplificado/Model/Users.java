@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Entity
+@Embeddable
 @Getter
 @ToString
 @RequiredArgsConstructor
@@ -30,15 +32,13 @@ public class Users {
     @Column(nullable = false, unique = true)
     private final Email email;
     @Embedded
-    @Column(unique = true)
-    private CNPJ cnpj;
-    @Embedded
-    private Nome nome;
+    private final Nome nome;
 
     @JsonCreator
-    public Users(@JsonProperty("cpf") String cpf, @JsonProperty("email") String email) throws Exception {
+    public Users(@JsonProperty("cpf") String cpf, @JsonProperty("email") String email, String nome) throws Exception {
         this.cpf = new CPF(cpf);
         this.email = new Email(email);
+        this.nome = new Nome(nome);
     }
 
 }
