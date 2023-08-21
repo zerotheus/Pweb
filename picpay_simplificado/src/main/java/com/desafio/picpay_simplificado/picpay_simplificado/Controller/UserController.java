@@ -28,13 +28,9 @@ public class UserController {
         System.out.println(user);
     }
 
-    @PostMapping("/cnpj")
-    public void testeCN(@RequestBody CNPJ cnpj) {
-        /*
-         * System.out.println(cpf);
-         * System.out.println(email);
-         */
-        System.out.println(cnpj);
+    @PostMapping("/CriaPF")
+    public void createContaPF(@RequestBody Users user) {
+        System.out.println(user);
     }
 
 }
