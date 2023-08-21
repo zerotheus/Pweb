@@ -3,7 +3,6 @@ package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Entity(name = "users")
-// @Embeddable
 @Getter
 @ToString
 @RequiredArgsConstructor
