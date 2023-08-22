@@ -25,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Entity
 @Table(name = "contas")
-public class Conta implements EnvioDeTransferencias, Depositos {
+public class ContaPF implements EnvioDeTransferencias, Depositos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +60,7 @@ public class Conta implements EnvioDeTransferencias, Depositos {
     }
 
     @JsonCreator
-    public Conta(Users user) {
+    public ContaPF(Users user) {
         this.user = user;
     }
 

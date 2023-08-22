@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.desafio.picpay_simplificado.picpay_simplificado.Model.Conta;
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPF;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPJ;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Users;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Calistenics.CNPJ;
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/CriaPF")
-    public void createContaPF(@RequestBody Conta conta) {
+    public void createContaPF(@RequestBody ContaPF conta) {
         System.out.println(conta);
     }
 
