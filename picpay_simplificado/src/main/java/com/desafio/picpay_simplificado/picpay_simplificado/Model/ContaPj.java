@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -22,42 +23,23 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.ToString;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 @Entity
 @Table(name = "contas")
 @Getter
 @ToString
-public class ContaPJ implements Depositos {
+@DiscriminatorValue(value = "PJ")
+public class ContaPJ extends ContaModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long contaId;
     @Embedded
     @Column(unique = true, nullable = false)
     private CNPJ cnpj;
-    private final String tipo = "PF";
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
-    private float saldo;
-    @CreationTimestamp
-    @Column(name = "createdAt", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-    @UpdateTimestamp
-    @Column(name = "updatedAt", nullable = false)
-    private LocalDateTime updatedAt;
 
     @JsonCreator
     public ContaPJ(@JsonProperty("user") Users user, @JsonProperty("cnpj") String cnpj) throws Exception {
-        this.user = user;
+        super(user, "PJ");
         this.cnpj = new CNPJ(cnpj);
-    }
-
-    public void deposita(float valorADepositar) throws Exception {
-        if (valorADepositar <= 0) {
-            throw new Exception("Nao se pode depositar valores negativos");
-        }
-        saldo += valorADepositar;
     }
 
 }

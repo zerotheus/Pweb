@@ -10,6 +10,7 @@ import com.desafio.picpay_simplificado.picpay_simplificado.Interface.EnvioDeTran
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,47 +22,33 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.ToString;
 
-@ToString
+//@ToString
 @Getter
 @Entity
 @Table(name = "contas")
-public class ContaPF implements EnvioDeTransferencias, Depositos {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ContaId;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
-    private float saldo;
-    private final String tipo = "PF";
-    @CreationTimestamp
-    @Column(name = "createdAt", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-    @UpdateTimestamp
-    @Column(name = "updatedAt", nullable = false)
-    private LocalDateTime updatedAt;
+@DiscriminatorValue(value = "PF")
+public class ContaPF extends ContaModel implements EnvioDeTransferencias {
 
     public void deposita(float valorADepositar) throws Exception {
         if (valorADepositar <= 0) {
             throw new Exception("Nao se pode depositar valores negativos");
         }
-        saldo += valorADepositar;
+        super.saldo += valorADepositar;
     }
 
     public void transfere(float valorDaTransferencia) throws Exception {
-        if (valorDaTransferencia > saldo) {
-            throw new Exception("Saldo insuficiente");
+        if (valorDaTransferencia > super.saldo) {
+            throw new Exception("super.Saldo insuficiente");
         }
         if (valorDaTransferencia <= 0) {
             throw new Exception("Nao se pode trasnferir valores negativos");
         }
-        saldo -= valorDaTransferencia;
+        super.saldo -= valorDaTransferencia;
     }
 
     @JsonCreator
     public ContaPF(Users user) {
-        this.user = user;
+        super(user, "PF");
     }
 
 }
