@@ -1,26 +1,12 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import com.desafio.picpay_simplificado.picpay_simplificado.Interface.Depositos;
 import com.desafio.picpay_simplificado.picpay_simplificado.Interface.EnvioDeTransferencias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.ToString;
 
 //@ToString
 @Getter
