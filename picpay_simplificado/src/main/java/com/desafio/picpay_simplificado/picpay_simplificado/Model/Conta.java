@@ -5,9 +5,12 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.desafio.picpay_simplificado.picpay_simplificado.Interface.Depositos;
+import com.desafio.picpay_simplificado.picpay_simplificado.Interface.EnvioDeTransferencias;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Entity
 @Table(name = "contas")
-public class ContaPF {
+public class Conta implements EnvioDeTransferencias, Depositos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +60,7 @@ public class ContaPF {
     }
 
     @JsonCreator
-    public ContaPF(Users user) {
+    public Conta(Users user) {
         this.user = user;
     }
 
