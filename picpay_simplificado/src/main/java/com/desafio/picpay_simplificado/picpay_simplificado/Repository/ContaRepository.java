@@ -20,4 +20,6 @@ public interface ContaRepository extends JpaRepository<ContaModel, Long> {
     @Query(value = "Select * FROM contas WHERE contaId = 'id' AND tipo = PJ", nativeQuery = true)
     public Optional<ContaPJ> findContaPJbyId(@Param("id") Long id);
 
+    public ContaPF save(ContaPF contaPF);
+
 }

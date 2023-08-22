@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPF;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPJ;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Users;
+import com.desafio.picpay_simplificado.picpay_simplificado.Services.ContasServices;
 
 import lombok.AllArgsConstructor;
 
@@ -15,6 +16,8 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/User")
 @AllArgsConstructor
 public class ContasController {
+
+    private ContasServices contasServices;
 
     @PostMapping("/Register") // usado para debug
     public void createUser(@RequestBody Users user) {
