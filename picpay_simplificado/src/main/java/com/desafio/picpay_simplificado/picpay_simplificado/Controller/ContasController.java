@@ -26,7 +26,8 @@ public class ContasController {
 
     @PostMapping("/CriaPF")
     public void createContaPF(@RequestBody ContaPF conta) {
-        System.out.println(conta);
+        System.out.println(conta.getUser());
+        contasServices.criaContaPF(conta);
     }
 
     @PostMapping("/CriaPJ")

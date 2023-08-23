@@ -34,7 +34,7 @@ public class Users {
     @Column(nullable = false, unique = true)
     private final CPF cpf;
     @Embedded
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "email")
     private final Email email;
     @Embedded
     private final Nome nome;
