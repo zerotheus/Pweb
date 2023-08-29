@@ -14,7 +14,6 @@ import lombok.ToString;
 @Entity
 @Table(name = "contas")
 @Getter
-@ToString
 @DiscriminatorValue(value = "PJ")
 public class ContaPJ extends ContaModel {
 
@@ -26,6 +25,11 @@ public class ContaPJ extends ContaModel {
     public ContaPJ(@JsonProperty("user") Users user, @JsonProperty("cnpj") String cnpj) throws Exception {
         super(user, "PJ");
         this.cnpj = new CNPJ(cnpj);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + this.cnpj.toString();
     }
 
 }
