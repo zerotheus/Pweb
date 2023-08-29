@@ -32,7 +32,7 @@ public class ContasController {
 
     @PostMapping("/CriaPJ")
     public void createContaPJ(@RequestBody ContaPJ contaPj) {
-        System.out.println(contaPj);
+        contasServices.criaContaPJ(contaPj);
     }
 
 }
