@@ -9,7 +9,6 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "contas")
@@ -31,5 +30,6 @@ public class ContaPJ extends ContaModel {
     public String toString() {
         return super.toString() + " " + this.cnpj.toString();
     }
+    
 
 }

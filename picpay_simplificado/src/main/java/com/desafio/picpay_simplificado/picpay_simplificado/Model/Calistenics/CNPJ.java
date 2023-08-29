@@ -20,4 +20,6 @@ public class CNPJ implements ValidacaoDeCNPJ {
         this.cnpj = cnpj;
     }
 
+    private CNPJ(){}
+
 }
