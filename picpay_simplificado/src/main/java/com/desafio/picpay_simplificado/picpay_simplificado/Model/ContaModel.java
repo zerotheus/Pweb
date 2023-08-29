@@ -3,7 +3,7 @@ package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import com.desafio.picpay_simplificado.picpay_simplificado.Interface.Depositos;
+import com.desafio.picpay_simplificado.picpay_simplificado.Interface.RecebeDepositos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -24,7 +24,7 @@ import lombok.ToString;
 @Entity(name = "contas")
 @DiscriminatorColumn(columnDefinition = "tipo")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class ContaModel implements Depositos {
+public abstract class ContaModel implements RecebeDepositos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
