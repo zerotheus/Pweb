@@ -1,29 +1,29 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
 import java.time.LocalDateTime;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import com.desafio.picpay_simplificado.picpay_simplificado.Interface.Depositos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.OneToOne;
-//import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.ToString;
 
 //Utilizada para abstrair conta em consultas ao banco de dados
 @Getter
 @ToString
-@MappedSuperclass
+@Entity(name = "contas")
 @DiscriminatorColumn(columnDefinition = "tipo")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class ContaModel implements Depositos {
 
     @Id
