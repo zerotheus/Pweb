@@ -22,4 +22,5 @@ public interface ContaRepository extends JpaRepository<ContaModel, Long> {
 
     public ContaPF save(ContaPF contaPF);
 
+    public ContaPJ save(ContaPJ contaPJ);
 }
