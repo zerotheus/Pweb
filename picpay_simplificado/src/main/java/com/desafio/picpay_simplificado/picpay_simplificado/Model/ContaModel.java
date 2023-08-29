@@ -22,7 +22,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity(name = "contas")
-@DiscriminatorColumn(columnDefinition = "tipo")
+@DiscriminatorColumn(name = "tipo")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class ContaModel implements RecebeDepositos {
 
@@ -33,6 +33,7 @@ public abstract class ContaModel implements RecebeDepositos {
     @JoinColumn(name = "user_id")
     private Users user;
     protected float saldo = 0;
+    @Column(name = "tipo", insertable = false, updatable = false)
     private final String tipo;
     @CreationTimestamp
     @Column(name = "createdAt", nullable = false, updatable = false)
