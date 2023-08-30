@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Transacao;
 
 @Repository
-public interface TransacaoRepository extends JpaRepository<Long, Transacao> {
+public interface TransacaoRepository extends JpaRepository<Transacao, Long> {
 
 }
