@@ -1,6 +1,7 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +14,6 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@RequiredArgsConstructor
 @Entity
 @Setter
 public class Transacao {
