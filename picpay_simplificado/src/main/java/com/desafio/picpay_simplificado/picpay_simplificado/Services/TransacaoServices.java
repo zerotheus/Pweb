@@ -16,8 +16,9 @@ public class TransacaoServices {
     private TransacaoRepository transacaoRepository;
 
     public void validaTransacao(Long remetenteId, Long destinatarioId, double valor) throws Exception {
-        adicionaRemetente(remetenteId);
-        adicionaDestinatario(destinatarioId);
+        ContaPF contaPFdoRemetente = adicionaRemetente(remetenteId);
+        ContaModel contaDoDestinatario = adicionaDestinatario(destinatarioId);
+        
     }
 
     private ContaPF adicionaRemetente(Long remetenteId) throws Exception {

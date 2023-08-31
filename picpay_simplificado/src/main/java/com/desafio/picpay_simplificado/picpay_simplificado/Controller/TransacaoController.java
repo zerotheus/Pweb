@@ -24,14 +24,24 @@ public class TransacaoController {
     @ResponseStatus(code = HttpStatus.CREATED)
     public HttpStatus transfere(@RequestBody Map<String, String> json) {
         System.out.println(json);
+        final long remetenteId;
+        final long destinatarioId;
+        final double valor;
         try {
-            final int remetenteId = Integer.parseInt(json.get("remetenteId"));
-            final int destinatarioId = Integer.parseInt(json.get("destinatarioId"));
-            final double valor = Double.parseDouble(json.get("valor"));
+            remetenteId = Integer.parseInt(json.get("remetenteId"));
+            destinatarioId = Integer.parseInt(json.get("destinatarioId"));
+            valor = Double.parseDouble(json.get("valor"));
+            if (valor <= 0) {
+                return HttpStatus.BAD_REQUEST;
+            }
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
         }
-       // transacaoServices.validaTransacao(new Transacao());
+        try {
+            transacaoServices.validaTransacao(remetenteId, destinatarioId, valor);
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
+        }
         return HttpStatus.CREATED;
     }
 
