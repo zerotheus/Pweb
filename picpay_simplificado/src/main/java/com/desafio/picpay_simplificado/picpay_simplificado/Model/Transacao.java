@@ -1,14 +1,10 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -27,5 +23,14 @@ public class Transacao {
     @JoinColumn(name = "Conta_Id", insertable = false, updatable = false)
     private ContaModel destinatario;
     private double valor;
+
+    public Transacao() {
+    }
+
+    public Transacao(ContaPF remetente, ContaModel destinatario, double valor) {
+        this.remente = remetente;
+        this.destinatario = destinatario;
+        this.valor = valor;
+    }
 
 }

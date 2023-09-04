@@ -26,7 +26,6 @@ import lombok.ToString;
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = { "cpf", "email" }))
 @Getter
 @ToString
-@RequiredArgsConstructor
 public class Users {
 
     @Id
@@ -35,12 +34,12 @@ public class Users {
     private Long userId;
     @Embedded
     @Column(nullable = false, unique = true)
-    private final CPF cpf;
+    private CPF cpf;
     @Embedded
     @Column(nullable = false, unique = true, name = "email")
-    private final Email email;
+    private Email email;
     @Embedded
-    private final Nome nome;
+    private Nome nome;
     @CreationTimestamp
     @Column(name = "createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -54,6 +53,10 @@ public class Users {
         this.cpf = new CPF(cpf);
         this.email = new Email(email);
         this.nome = new Nome(nome);
+    }
+
+    private Users() {
+
     }
 
 }
