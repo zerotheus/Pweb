@@ -44,4 +44,14 @@ public class ContasServices {
                 .orElse(ResponseEntity.badRequest().build());
     }
 
+    public ResponseEntity<String> deposita(Long id, double valor) throws Exception {
+        ContaModel conta = encontraContaPeloId(id).getBody();
+        if (conta == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        conta.deposita(valor);
+        contaRepository.save(conta);
+        return ResponseEntity.created(null).build();
+    }
+
 }

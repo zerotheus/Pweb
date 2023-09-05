@@ -1,12 +1,10 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Controller;
 
 import java.util.Map;
-
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.desafio.picpay_simplificado.picpay_simplificado.Services.TransacaoServices;
 
@@ -20,8 +18,7 @@ public class TransacaoController {
     private TransacaoServices transacaoServices;
 
     @PostMapping("/Para")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public HttpStatus transfere(@RequestBody Map<String, String> json) {
+    public ResponseEntity<Object> transfere(@RequestBody Map<String, String> json) {
         System.out.println(json);
         final long remetenteId;
         final long destinatarioId;
@@ -31,17 +28,17 @@ public class TransacaoController {
             destinatarioId = Integer.parseInt(json.get("destinatarioId"));
             valor = Double.parseDouble(json.get("valor"));
             if (valor <= 0) {
-                return HttpStatus.BAD_REQUEST;
+                return ResponseEntity.badRequest().body("Valor invalido");
             }
         } catch (Exception e) {
-            return HttpStatus.BAD_REQUEST;
+            return ResponseEntity.badRequest().body("Forneça somente numeros");
         }
         try {
             transacaoServices.validaTransacao(remetenteId, destinatarioId, valor);
         } catch (Exception e) {
-            return HttpStatus.BAD_REQUEST;
+            return ResponseEntity.badRequest().body(e.toString());
         }
-        return HttpStatus.CREATED;
+        return ResponseEntity.ok().build();
     }
 
 }

@@ -14,10 +14,10 @@ import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPJ;
 @Repository
 public interface ContaRepository extends JpaRepository<ContaModel, Long> {
 
-    @Query(value = "Select * FROM contas WHERE contaId = 'id' AND tipo = PF", nativeQuery = true)
+    @Query(value = "Select * FROM contas WHERE conta_Id = ?1 AND tipo = 'PF'", nativeQuery = true)
     public Optional<ContaPF> findContaPFbyId(@Param("id") Long id);
 
-    @Query(value = "Select * FROM contas WHERE contaId = 'id' AND tipo = PJ", nativeQuery = true)
+    @Query(value = "Select * FROM contas WHERE conta_Id = ?1 AND tipo = 'PJ'", nativeQuery = true)
     public Optional<ContaPJ> findContaPJbyId(@Param("id") Long id);
 
     public ContaPF save(ContaPF contaPF);

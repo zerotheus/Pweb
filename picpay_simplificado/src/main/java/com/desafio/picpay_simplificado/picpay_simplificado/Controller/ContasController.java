@@ -1,10 +1,14 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Controller;
 
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaModel;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPF;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPJ;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Users;
@@ -35,4 +39,10 @@ public class ContasController {
         contasServices.criaContaPJ(contaPj);
     }
 
+    @PostMapping("/Deposita")
+    public ResponseEntity deposita(@RequestBody Map<String, String> json) throws NumberFormatException, Exception {
+        final long id = Long.parseLong(json.get("id"));
+        final double valor = Double.parseDouble(json.get("valor"));
+        return contasServices.deposita(id, valor);
+    }
 }

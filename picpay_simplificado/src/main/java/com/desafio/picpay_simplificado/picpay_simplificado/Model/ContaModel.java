@@ -32,9 +32,9 @@ public abstract class ContaModel implements RecebeDepositos {
     @OneToOne
     @JoinColumn(name = "user_id")
     private Users user;
-    protected float saldo = 0;
+    protected double saldo = 0;
     @Column(name = "tipo", insertable = false, updatable = false)
-    private final String tipo;
+    private String tipo;
     @CreationTimestamp
     @Column(name = "createdAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -42,11 +42,15 @@ public abstract class ContaModel implements RecebeDepositos {
     @Column(name = "updatedAt", nullable = false)
     private LocalDateTime updatedAt;
 
-    public void deposita(float valorADepositar) throws Exception {
+    public void deposita(Double valorADepositar) throws Exception {
         if (valorADepositar <= 0) {
             throw new Exception("Nao se pode depositar valores negativos");
         }
         this.saldo += valorADepositar;
+    }
+
+    protected ContaModel() {
+
     }
 
     public ContaModel(Users user, String tipo) {

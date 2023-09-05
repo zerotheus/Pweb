@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaModel;
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.ContaPF;
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.Transacao;
 import com.desafio.picpay_simplificado.picpay_simplificado.Repository.TransacaoRepository;
 
 @Service
@@ -15,10 +16,12 @@ public class TransacaoServices {
     private ContasServices contasServices;
     private TransacaoRepository transacaoRepository;
 
-    public void validaTransacao(Long remetenteId, Long destinatarioId, double valor) throws Exception {
+    public ResponseEntity<Transacao> validaTransacao(Long remetenteId, Long destinatarioId, double valor)
+            throws Exception {
         ContaPF contaPFdoRemetente = adicionaRemetente(remetenteId);
         ContaModel contaDoDestinatario = adicionaDestinatario(destinatarioId);
-        
+        contaPFdoRemetente.transfere(valor);
+        return ResponseEntity.ok().body(new Transacao(contaPFdoRemetente, contaDoDestinatario, valor));
     }
 
     private ContaPF adicionaRemetente(Long remetenteId) throws Exception {

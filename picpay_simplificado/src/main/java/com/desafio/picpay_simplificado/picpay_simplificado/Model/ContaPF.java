@@ -15,14 +15,14 @@ import lombok.Getter;
 @DiscriminatorValue(value = "PF")
 public class ContaPF extends ContaModel implements EnvioDeTransferencias {
 
-    public void deposita(float valorADepositar) throws Exception {
+    public void deposita(double valorADepositar) throws Exception {
         if (valorADepositar <= 0) {
             throw new Exception("Nao se pode depositar valores negativos");
         }
         super.saldo += valorADepositar;
     }
 
-    public void transfere(float valorDaTransferencia) throws Exception {
+    public void transfere(double valorDaTransferencia) throws Exception {
         if (valorDaTransferencia > super.saldo) {
             throw new Exception("super.Saldo insuficiente");
         }
@@ -30,6 +30,10 @@ public class ContaPF extends ContaModel implements EnvioDeTransferencias {
             throw new Exception("Nao se pode trasnferir valores negativos");
         }
         super.saldo -= valorDaTransferencia;
+    }
+
+    private ContaPF() {
+        super();
     }
 
     @JsonCreator
