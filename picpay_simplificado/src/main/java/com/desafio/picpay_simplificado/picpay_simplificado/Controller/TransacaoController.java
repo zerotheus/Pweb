@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.desafio.picpay_simplificado.picpay_simplificado.Model.Transacao;
 import com.desafio.picpay_simplificado.picpay_simplificado.Services.TransacaoServices;
 
 import lombok.AllArgsConstructor;

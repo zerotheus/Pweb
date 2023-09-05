@@ -4,8 +4,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
+    
     public static void main(String[] args) throws Exception {
-        Socket socket = new Socket("localhost", 8080);
+        Socket socket = new Socket("localhost", 1234);
 
         BufferedReader leitor = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter escritor = new PrintWriter(socket.getOutputStream(), true);
