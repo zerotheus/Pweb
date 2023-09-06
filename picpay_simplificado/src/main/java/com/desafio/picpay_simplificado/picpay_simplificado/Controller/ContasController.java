@@ -40,7 +40,7 @@ public class ContasController {
     }
 
     @PostMapping("/Deposita")
-    public ResponseEntity deposita(@RequestBody Map<String, String> json) throws NumberFormatException, Exception {
+    public ResponseEntity<String> deposita(@RequestBody Map<String, String> json) throws NumberFormatException, Exception {
         final long id = Long.parseLong(json.get("id"));
         final double valor = Double.parseDouble(json.get("valor"));
         return contasServices.deposita(id, valor);

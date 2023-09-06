@@ -14,6 +14,7 @@ public class TransacaoServices {
 
     @Autowired
     private ContasServices contasServices;
+    @Autowired
     private TransacaoRepository transacaoRepository;
 
     public ResponseEntity<Transacao> validaTransacao(Long remetenteId, Long destinatarioId, double valor)
@@ -21,6 +22,9 @@ public class TransacaoServices {
         ContaPF contaPFdoRemetente = adicionaRemetente(remetenteId);
         ContaModel contaDoDestinatario = adicionaDestinatario(destinatarioId);
         contaPFdoRemetente.transfere(valor);
+        contaDoDestinatario.deposita(valor);
+        System.out.println(contaPFdoRemetente);
+        System.out.println(contaDoDestinatario);
         return ResponseEntity.ok().body(new Transacao(contaPFdoRemetente, contaDoDestinatario, valor));
     }
 
