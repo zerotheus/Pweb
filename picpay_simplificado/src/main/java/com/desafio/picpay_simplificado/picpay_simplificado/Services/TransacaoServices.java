@@ -17,7 +17,7 @@ public class TransacaoServices {
     @Autowired
     private TransacaoRepository transacaoRepository;
 
-    public ResponseEntity<Transacao> validaTransacao(Long remetenteId, Long destinatarioId, double valor)
+    public Transacao validaTransacao(Long remetenteId, Long destinatarioId, double valor)
             throws Exception {
         ContaPF contaPFdoRemetente = adicionaRemetente(remetenteId);
         ContaModel contaDoDestinatario = adicionaDestinatario(destinatarioId);
@@ -25,7 +25,7 @@ public class TransacaoServices {
         contaDoDestinatario.deposita(valor);
         System.out.println(contaPFdoRemetente);
         System.out.println(contaDoDestinatario);
-        return ResponseEntity.ok().body(new Transacao(contaPFdoRemetente, contaDoDestinatario, valor));
+        return new Transacao(contaPFdoRemetente, contaDoDestinatario, valor);
     }
 
     private ContaPF adicionaRemetente(Long remetenteId) throws Exception {

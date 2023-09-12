@@ -31,5 +31,8 @@ public class ContaPJ extends ContaModel {
         return super.toString() + " " + this.cnpj.toString();
     }
     
+    private ContaPJ(){
+        
+    }
 
 }

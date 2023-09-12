@@ -1,11 +1,16 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Controller;
 
 import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.Transacao;
 import com.desafio.picpay_simplificado.picpay_simplificado.Services.TransacaoServices;
 
 import lombok.AllArgsConstructor;
@@ -34,11 +39,12 @@ public class TransacaoController {
             return ResponseEntity.badRequest().body("Forneça somente numeros");
         }
         try {
-            transacaoServices.validaTransacao(remetenteId, destinatarioId, valor);
+            Transacao transacaoConcluida = transacaoServices.validaTransacao(remetenteId,
+                    destinatarioId, valor);
+            return ResponseEntity.status(201).build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.toString());
         }
-        return ResponseEntity.ok().build();
     }
 
 }
