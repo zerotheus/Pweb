@@ -1,5 +1,7 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Services;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,7 +27,12 @@ public class TransacaoServices {
         contaDoDestinatario.deposita(valor);
         System.out.println(contaPFdoRemetente);
         System.out.println(contaDoDestinatario);
-        return new Transacao(contaPFdoRemetente, contaDoDestinatario, valor);
+        if (!foiAutorizada()) {
+            throw new Exception("Nao foi autorizada");
+        }
+        Transacao transacao = new Transacao(contaPFdoRemetente, contaDoDestinatario, valor);
+        System.out.println(transacao.toString());
+        return transacaoRepository.save(transacao);
     }
 
     private ContaPF adicionaRemetente(Long remetenteId) throws Exception {
@@ -44,8 +51,12 @@ public class TransacaoServices {
         return resultadoDaBusca.getBody();
     }
 
+    // Os servicos de mock do repositorio ficaram desativados por um longo tempo
+    // então estou utilizando esta funcao para simular isso
     private boolean foiAutorizada() {
-        return false;
+        Random foiAprovado = new Random();
+        Random diminuiChancesDeNaoAprovae = new Random();
+        return foiAprovado.nextBoolean() || diminuiChancesDeNaoAprovae.nextBoolean();
     }
 
 }
