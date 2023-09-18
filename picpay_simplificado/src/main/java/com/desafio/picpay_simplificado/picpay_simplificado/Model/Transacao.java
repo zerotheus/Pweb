@@ -1,6 +1,8 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,6 +17,7 @@ import lombok.ToString;
 public class Transacao {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long TrasancaoId;
     @ManyToOne
     @JoinColumn(name = "Conta_Id", insertable = false, updatable = false)
