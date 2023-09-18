@@ -2,8 +2,6 @@ package com.desafio.picpay_simplificado.picpay_simplificado.Controller;
 
 import java.util.Map;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,6 +39,7 @@ public class TransacaoController {
         try {
             Transacao transacaoConcluida = transacaoServices.validaTransacao(remetenteId,
                     destinatarioId, valor);
+            System.out.println(transacaoConcluida.toString());
             return ResponseEntity.status(201).build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.toString());
