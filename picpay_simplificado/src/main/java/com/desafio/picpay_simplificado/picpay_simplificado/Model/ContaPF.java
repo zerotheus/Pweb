@@ -39,7 +39,7 @@ public class ContaPF extends ContaModel implements EnvioDeTransferencias {
         super.saldo -= valorDaTransferencia;
     }
 
-    private ContaPF() {
+    public ContaPF() {
         super();
     }
 

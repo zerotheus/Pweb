@@ -1,5 +1,6 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Services;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class TransacaoServices {
         Random foiAprovado = new Random();
         Random diminuiChancesDeNaoAprovae = new Random();
         return foiAprovado.nextBoolean() || diminuiChancesDeNaoAprovae.nextBoolean();
+    }
+
+    public List<Transacao> listaTodasMinhasTransacoes(long contaId) {
+        return transacaoRepository.listaTodasTransacoesdeUmaConta(contaId);
     }
 
 }

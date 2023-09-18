@@ -13,7 +13,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@ToString
 @Entity
 @Setter
 public class Transacao {
@@ -36,6 +35,12 @@ public class Transacao {
         this.remetente = remetente;
         this.destinatario = destinatario;
         this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        return "id: transacao" + TrasancaoId + "\nvalor: " + valor + "\nremetente" + remetente.getContaId()
+                + "\ndestinatario" + destinatario.getContaId();
     }
 
 }
