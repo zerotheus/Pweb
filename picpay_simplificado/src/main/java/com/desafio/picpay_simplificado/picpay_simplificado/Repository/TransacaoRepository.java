@@ -14,4 +14,10 @@ public interface TransacaoRepository extends JpaRepository<Transacao, Long> {
     @Query(value = "Select * FROM transacao WHERE Conta_Id_destinatario = ?1 or Conta_Id_remetente = ?1 ", nativeQuery = true)
     public List<Transacao> listaTodasTransacoesdeUmaConta(@Param("id") Long id);
 
+    @Query(value = "Select * FROM transacao WHERE Conta_Id_destinatario = ?1", nativeQuery = true)
+    public List<Transacao> listaTodasEntradasdeUmaConta(@Param("id") Long id);
+
+    @Query(value = "Select * FROM transacao WHERE Conta_Id_remetente = ?1 ", nativeQuery = true)
+    public List<Transacao> listaTodasSaidasdeUmaConta(@Param("id") Long id);
+
 }

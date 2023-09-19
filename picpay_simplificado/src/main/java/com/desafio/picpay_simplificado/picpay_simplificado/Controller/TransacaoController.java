@@ -18,13 +18,13 @@ import com.desafio.picpay_simplificado.picpay_simplificado.Services.TransacaoSer
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/Transfere")
+@RequestMapping("/Transacoes")
 @AllArgsConstructor
 public class TransacaoController {
 
     private TransacaoServices transacaoServices;
 
-    @PostMapping("/Para")
+    @PostMapping("/Transfere")
     public ResponseEntity<Object> transfere(@RequestBody Map<String, String> json) {
         System.out.println(json);
         final long remetenteId;
@@ -57,7 +57,33 @@ public class TransacaoController {
         final List<TransacaoDTO> transacoesDtos = new ArrayList<TransacaoDTO>();
         for (Transacao transacao : transacoesEncontradas) {
             transacoesDtos
-                    .add(new TransacaoDTO(transacao.getRemetente().getContaId(),
+                    .add(new TransacaoDTO(transacao.getTrasancaoId(), transacao.getRemetente().getContaId(),
+                            transacao.getDestinatario().getContaId(), transacao.getValor()));
+        }
+        return ResponseEntity.ok().body(transacoesDtos);
+    }
+
+    @GetMapping("/Entradas")
+    public ResponseEntity<List<TransacaoDTO>> listaTodasMinhasEntradas(@RequestBody Map<String, String> json) {
+        long userId = Long.parseLong(json.get("userId"));
+        List<Transacao> transacoesEncontradas = transacaoServices.listaTodasMinhasEntradas(userId);
+        final List<TransacaoDTO> transacoesDtos = new ArrayList<TransacaoDTO>();
+        for (Transacao transacao : transacoesEncontradas) {
+            transacoesDtos
+                    .add(new TransacaoDTO(transacao.getTrasancaoId(), transacao.getRemetente().getContaId(),
+                            transacao.getDestinatario().getContaId(), transacao.getValor()));
+        }
+        return ResponseEntity.ok().body(transacoesDtos);
+    }
+
+    @GetMapping("/Saidas")
+    public ResponseEntity<List<TransacaoDTO>> listaTodasMinhasSaidas(@RequestBody Map<String, String> json) {
+        long userId = Long.parseLong(json.get("userId"));
+        List<Transacao> transacoesEncontradas = transacaoServices.listaTodasMinhasSaidas(userId);
+        final List<TransacaoDTO> transacoesDtos = new ArrayList<TransacaoDTO>();
+        for (Transacao transacao : transacoesEncontradas) {
+            transacoesDtos
+                    .add(new TransacaoDTO(transacao.getTrasancaoId(), transacao.getRemetente().getContaId(),
                             transacao.getDestinatario().getContaId(), transacao.getValor()));
         }
         return ResponseEntity.ok().body(transacoesDtos);

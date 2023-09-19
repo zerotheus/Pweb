@@ -64,4 +64,12 @@ public class TransacaoServices {
         return transacaoRepository.listaTodasTransacoesdeUmaConta(contaId);
     }
 
+    public List<Transacao> listaTodasMinhasEntradas(long contaId) {
+        return transacaoRepository.listaTodasEntradasdeUmaConta(contaId);
+    }
+
+    public List<Transacao> listaTodasMinhasSaidas(long contaId) {
+        return transacaoRepository.listaTodasSaidasdeUmaConta(contaId);
+    }
+
 }

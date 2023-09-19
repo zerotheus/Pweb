@@ -7,11 +7,13 @@ import lombok.Setter;
 @Setter
 public class TransacaoDTO {
 
+    private final long numerodetransacao;
     private final long destinatarioId;
     private final long remetenteId;
     private final double valor;
 
-    public TransacaoDTO(long remetenteId, long destinatarioId, double valor) {
+    public TransacaoDTO(long numerodetransacao,long remetenteId, long destinatarioId, double valor) {
+        this.numerodetransacao = numerodetransacao;
         this.destinatarioId = destinatarioId;
         this.remetenteId = remetenteId;
         this.valor = valor;
