@@ -1,5 +1,6 @@
 package com.desafio.picpay_simplificado.picpay_simplificado.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.picpay_simplificado.picpay_simplificado.Model.Transacao;
+import com.desafio.picpay_simplificado.picpay_simplificado.Model.DTOs.TransacaoDTO;
 import com.desafio.picpay_simplificado.picpay_simplificado.Services.TransacaoServices;
 
 import lombok.AllArgsConstructor;
@@ -49,10 +51,16 @@ public class TransacaoController {
     }
 
     @GetMapping("/MinhasTransacoes")
-    public ResponseEntity<List<Transacao>> listaTodasMinhasTransacoes(@RequestBody Map<String, String> json) {
+    public ResponseEntity<List<TransacaoDTO>> listaTodasMinhasTransacoes(@RequestBody Map<String, String> json) {
         long userId = Long.parseLong(json.get("userId"));
-        System.out.println(transacaoServices.listaTodasMinhasTransacoes(userId));
-        return null;
+        List<Transacao> transacoesEncontradas = transacaoServices.listaTodasMinhasTransacoes(userId);
+        final List<TransacaoDTO> transacoesDtos = new ArrayList<TransacaoDTO>();
+        for (Transacao transacao : transacoesEncontradas) {
+            transacoesDtos
+                    .add(new TransacaoDTO(transacao.getRemetente().getContaId(),
+                            transacao.getDestinatario().getContaId(), transacao.getValor()));
+        }
+        return ResponseEntity.ok().body(transacoesDtos);
     }
 
 }
